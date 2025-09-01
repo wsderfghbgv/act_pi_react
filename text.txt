@@ -95,11 +95,11 @@ export default function ComponentName({ prop }: Props) {
 ### Información del Grupo
 - **Institución**: SENA
 - **Programa**: Análisis y Desarrollo de Software
-- **Ficha**: [Número de ficha]
-- **Instructor**: [Nombre del instructor]
+- **Ficha**: [3144585]
+- **Instructor**: [jhon jairo]
 - **Período**: 2024
 
 ### Integrantes
-1. **[Tu nombre]** - Líder del proyecto
-2. **[Integrante 2]** - Frontend Developer
-3. **[Integrante 3]** - Frontend Developer
+1. **[Andres narvaez]** - Líder del proyecto
+2. **[samuel guarin]** - Frontend Developer
+3. **[estiven cataño]** - Frontend Developer
