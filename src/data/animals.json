@@ -1,0 +1,65 @@
+[
+    {
+      "id": "1",
+      "name": "Luna",
+      "breed": "Golden Retriever",
+      "age": 3,
+      "gender": "female",
+      "size": "large",
+      "color": "Dorado",
+      "description": "Luna es una perrita muy cariñosa y juguetona. Le encanta estar con niños y es excelente para familias. Está entrenada en comandos básicos.",
+      "image": "/images/luna.jpg",
+      "isAdopted": false,
+      "location": "Bogotá",
+      "temperament": ["amigable", "juguetón", "inteligente", "leal"],
+      "healthInfo": {
+        "vaccinated": true,
+        "sterilized": true,
+        "microchipped": true
+      },
+      "adoptionFee": 150000,
+      "createdAt": "2024-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Max",
+      "breed": "Labrador",
+      "age": 2,
+      "gender": "male",
+      "size": "large",
+      "color": "Negro",
+      "description": "Max es un perro muy activo y enérgico. Perfecto para personas que les gusta hacer ejercicio. Es muy obediente y leal.",
+      "image": "/images/max.jpg",
+      "isAdopted": false,
+      "location": "Medellín",
+      "temperament": ["activo", "leal", "inteligente", "protector"],
+      "healthInfo": {
+        "vaccinated": true,
+        "sterilized": true,
+        "microchipped": true
+      },
+      "adoptionFee": 120000,
+      "createdAt": "2024-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "Bella",
+      "breed": "Poodle",
+      "age": 1,
+      "gender": "female",
+      "size": "medium",
+      "color": "Blanco",
+      "description": "Bella es una perrita muy elegante y cariñosa. Es perfecta para apartamentos y familias pequeñas. Muy inteligente y fácil de entrenar.",
+      "image": "/images/bella.jpg",
+      "isAdopted": false,
+      "location": "Cali",
+      "temperament": ["elegante", "cariñoso", "inteligente", "tranquilo"],
+      "healthInfo": {
+        "vaccinated": true,
+        "sterilized": false,
+        "microchipped": true
+      },
+      "adoptionFee": 180000,
+      "createdAt": "2024-01-20T00:00:00.000Z"
+    }
+  ]

@@ -1,0 +1,105 @@
+
+## Instalación y Desarrollo
+
+### Prerrequisitos
+- Node.js 18+ 
+- npm o yarn
+
+### Pasos de instalación
+```bash
+# Clonar el repositorio
+git clone [URL_DEL_REPOSITORIO]
+cd act_pi_react
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+```
+
+### Scripts disponibles
+- `npm run dev` - Servidor de desarrollo
+- `npm run build` - Construir para producción
+- `npm run start` - Servidor de producción
+- `npm run lint` - Verificar código
+
+## Distribución de Tareas
+
+### Integrante 1 (Líder)
+- ✅ Estructura base del proyecto
+- ✅ Tipos TypeScript
+- ✅ Layout principal y navegación
+- ✅ Página principal
+- 🔄 Coordinación del proyecto
+
+### Integrante 2
+- ⏳ Componente Hero
+- ⏳ Componente AnimalCard
+- ⏳ Componente Statistics
+- ⏳ Página de adopción
+
+### Integrante 3
+- ⏳ Formulario de adopción
+- ⏳ Página de contacto
+- ⏳ Footer mejorado
+
+## Convenciones de Código
+
+### Commits
+- Usar mensajes descriptivos en español
+- Formato: `feat: agregar componente Hero`
+- Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `test`
+
+### Nomenclatura
+- Componentes: PascalCase (ej: `AnimalCard`)
+- Archivos: kebab-case (ej: `animal-card.tsx`)
+- Variables: camelCase (ej: `animalData`)
+
+### Estructura de Componentes
+```typescript
+// Imports
+import { useState } from 'react';
+
+// Types
+interface Props {
+  // definir props
+}
+
+// Component
+export default function ComponentName({ prop }: Props) {
+  // lógica del componente
+  return (
+    // JSX
+  );
+}
+```
+
+## Registro de Avances
+
+### Clase 1 - Estructura Base
+- **Fecha**: [Fecha actual]
+- **Objetivos**:
+  - ✅ Configurar estructura de carpetas
+  - ✅ Definir tipos TypeScript
+  - ✅ Crear layout base
+  - ✅ Implementar navegación
+- **Responsable**: [Tu nombre] - Líder del proyecto
+
+### Próximas Clases
+- **Clase 2**: Componentes de features (Integrante 2)
+- **Clase 3**: Formularios y contacto (Integrante 3)
+- **Clase 4**: Testing y optimización (Equipo completo)
+
+## Contacto
+### Información del Grupo
+- **Institución**: SENA
+- **Programa**: Análisis y Desarrollo de Software
+- **Ficha**: [Número de ficha]
+- **Instructor**: [Nombre del instructor]
+- **Período**: 2024
+
+### Integrantes
+1. **[Tu nombre]** - Líder del proyecto
+2. **[Integrante 2]** - Frontend Developer
+3. **[Integrante 3]** - Frontend Developer
