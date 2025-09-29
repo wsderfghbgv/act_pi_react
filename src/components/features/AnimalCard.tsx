@@ -9,8 +9,12 @@ interface AnimalCardProps {
 export default function AnimalCard({ animal }: AnimalCardProps) {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    // Usar un placeholder más atractivo
-    target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ccircle cx='200' cy='120' r='40' fill='%23d1d5db'/%3E%3Cpath d='M160 200 Q200 160 240 200 L240 250 L160 250 Z' fill='%23d1d5db'/%3E%3Ctext x='50%25' y='280' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%236b7280'%3E🐕%3C/text%3E%3C/svg%3E";
+    // Placeholder diferente para perros y gatos
+    const isDog = animal.type === 'dog';
+    const emoji = isDog ? '🐕' : '🐱';
+    const animalType = isDog ? 'Perro' : 'Gato';
+    
+    target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ccircle cx='200' cy='120' r='40' fill='%23d1d5db'/%3E%3Cpath d='M160 200 Q200 160 240 200 L240 250 L160 250 Z' fill='%23d1d5db'/%3E%3Ctext x='50%25' y='280' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%236b7280'%3E${emoji} ${animalType}%3C/text%3E%3C/svg%3E`;
   };
 
   const getSizeLabel = (size: string) => {
@@ -24,6 +28,14 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
 
   const getGenderLabel = (gender: string) => {
     return gender === 'male' ? 'Macho' : 'Hembra';
+  };
+
+  const getTypeEmoji = (type: string) => {
+    return type === 'dog' ? '🐕' : '🐱';
+  };
+
+  const getTypeColor = (type: string) => {
+    return type === 'dog' ? 'bg-blue-500' : 'bg-purple-500';
   };
 
   return (
@@ -42,6 +54,9 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
         )}
         <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-semibold">
           {getSizeLabel(animal.size)}
+        </div>
+        <div className={`absolute bottom-2 right-2 ${getTypeColor(animal.type)} text-white px-2 py-1 rounded text-xs font-semibold`}>
+          {getTypeEmoji(animal.type)} {animal.type === 'dog' ? 'Perro' : 'Gato'}
         </div>
       </div>
       
