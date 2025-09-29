@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import AnimalCard from "@/components/features/AnimalCard";
+import AdoptionModal, { AdoptionFormData } from "@/components/features/AdoptionModal";
 import animalsData from "@/data/animals.json";
 import { Animal, AnimalFilters } from "@/types/animal";
 
@@ -70,6 +72,25 @@ export default function AdopcionPage() {
   // Contar animales por tipo
   const dogCount = filteredAnimals.filter(animal => animal.type === 'dog').length;
   const catCount = filteredAnimals.filter(animal => animal.type === 'cat').length;
+
+  // Estado para el modal de adopción
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
+  const router = useRouter();
+
+  const handleAdoptClick = (animal: Animal) => {
+    setSelectedAnimal(animal);
+    setIsModalOpen(true);
+  };
+
+  const handleAdoptSubmit = (data: AdoptionFormData) => {
+    // Aquí podrías enviar datos a una API. Por ahora redirigimos a la página de éxito
+    const params = new URLSearchParams({
+      animalName: data.animalName || selectedAnimal?.name || '',
+      adopterName: data.adopterName || ''
+    });
+    router.push(`/adopcion/exito?${params.toString()}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -242,11 +263,18 @@ export default function AdopcionPage() {
               <AnimalCard
                 key={animal.id}
                 animal={animal}
+                onAdoptClick={handleAdoptClick}
               />
             ))}
           </div>
         )}
       </div>
+      <AdoptionModal
+        animal={selectedAnimal}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdopt={handleAdoptSubmit}
+      />
     </div>
   );
 }
