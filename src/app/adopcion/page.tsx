@@ -8,11 +8,11 @@ import { Animal, AnimalFilters } from "@/types/animal";
 export default function AdopcionPage() {
   // Convertir los datos del JSON al tipo Animal correctamente
   const allAnimals = animalsData.map((animal: any) => ({
-    ...animal,
+      ...animal,
     type: animal.type as 'dog' | 'cat',
-    gender: animal.gender as 'male' | 'female',
-    size: animal.size as 'small' | 'medium' | 'large',
-    createdAt: new Date(animal.createdAt),
+      gender: animal.gender as 'male' | 'female',
+      size: animal.size as 'small' | 'medium' | 'large',
+      createdAt: new Date(animal.createdAt),
   }));
 
   // Estados para los filtros

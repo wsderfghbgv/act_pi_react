@@ -4,17 +4,36 @@ import { Animal } from "@/types/animal";
 
 interface AnimalCardProps {
   animal: Animal;
+  onAdoptClick?: (animal: Animal) => void;
 }
 
-export default function AnimalCard({ animal }: AnimalCardProps) {
+export default function AnimalCard({ animal, onAdoptClick }: AnimalCardProps) {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
-    // Placeholder diferente para perros y gatos
-    const isDog = animal.type === 'dog';
-    const emoji = isDog ? '🐕' : '🐱';
-    const animalType = isDog ? 'Perro' : 'Gato';
     
-    target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ccircle cx='200' cy='120' r='40' fill='%23d1d5db'/%3E%3Cpath d='M160 200 Q200 160 240 200 L240 250 L160 250 Z' fill='%23d1d5db'/%3E%3Ctext x='50%25' y='280' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%236b7280'%3E${emoji} ${animalType}%3C/text%3E%3C/svg%3E`;
+    // Crear placeholder específico para cada raza
+    const breedPlaceholders: { [key: string]: string } = {
+      // Perros
+      'Golden Retriever': '🐕‍🦺',
+      'Labrador': '🐕',
+      'Poodle': '🐩',
+      'Bulldog': '🐶',
+      'Chihuahua': '🐕',
+      'Pastor Alemán': '🐕‍🦺',
+      // Gatos
+      'Persa': '🐱',
+      'Siamés': '🐈',
+      'Maine Coon': '🐈‍⬛',
+      'British Shorthair': '🐱',
+      'Mestizo': '🐈',
+      'Ragdoll': '🐈‍⬛'
+    };
+
+    const emoji = breedPlaceholders[animal.breed] || (animal.type === 'dog' ? '🐕' : '🐱');
+    const animalType = animal.type === 'dog' ? 'Perro' : 'Gato';
+    const breedName = animal.breed;
+    
+    target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f3f4f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23e5e7eb;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23bg)'/%3E%3Ccircle cx='200' cy='120' r='50' fill='%23d1d5db'/%3E%3Cpath d='M150 200 Q200 150 250 200 L250 250 L150 250 Z' fill='%23d1d5db'/%3E%3Ctext x='50%25' y='280' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='20' fill='%236b7280'%3E${emoji} ${breedName}%3C/text%3E%3C/svg%3E`;
   };
 
   const getSizeLabel = (size: string) => {
@@ -38,12 +57,34 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
     return type === 'dog' ? 'bg-blue-500' : 'bg-purple-500';
   };
 
+  // Función para obtener un color de fondo basado en la raza
+  const getBreedColor = (breed: string, type: string) => {
+    const breedColors: { [key: string]: string } = {
+      // Perros
+      'Golden Retriever': 'from-yellow-400 to-orange-500',
+      'Labrador': 'from-black to-gray-700',
+      'Poodle': 'from-white to-gray-200',
+      'Bulldog': 'from-brown-400 to-brown-600',
+      'Chihuahua': 'from-yellow-300 to-brown-400',
+      'Pastor Alemán': 'from-gray-600 to-black',
+      // Gatos
+      'Persa': 'from-gray-300 to-gray-500',
+      'Siamés': 'from-cream-200 to-brown-300',
+      'Maine Coon': 'from-gray-700 to-black',
+      'British Shorthair': 'from-blue-200 to-blue-400',
+      'Mestizo': 'from-orange-300 to-white',
+      'Ragdoll': 'from-white to-brown-200'
+    };
+    
+    return breedColors[breed] || (type === 'dog' ? 'from-blue-400 to-blue-600' : 'from-purple-400 to-purple-600');
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <div className="relative">
         <img
           src={animal.image}
-          alt={animal.name}
+          alt={`${animal.name} - ${animal.breed}`}
           className="w-full h-48 object-cover"
           onError={handleImageError}
         />
@@ -68,7 +109,10 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
           </span>
         </div>
         
-        <p className="text-gray-600 mb-3 font-medium">{animal.breed}</p>
+        <div className="mb-3">
+          <p className="text-gray-600 font-medium">{animal.breed}</p>
+          <p className="text-sm text-gray-500">{animal.color}</p>
+        </div>
         
         <div className="flex items-center justify-between mb-3 text-sm">
           <span className="text-gray-500">
@@ -124,7 +168,10 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
             </div>
           )}
           {!animal.isAdopted && (
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">
+            <button 
+              onClick={() => onAdoptClick?.(animal)}
+              className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+            >
               Adoptar
             </button>
           )}
